@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1" class="div111" name="div222">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div id="add">hellow</div>
+<style>
+    #replace{width: 500px;height: 300px;background: darkred;color: #fff}
+</style>
+<div id="replace">
+    <p>我需要替换的文本1</p>
+    <p>我需要替换的文本2</p></div>
+</body>
+<script src="jquery.js"></script>
+<script>
+//原生js
+    var div1=document.getElementById('div1');
+    console.log(div1.getElementsByTagName('li'));
+
+    console.log(div1);//div1标签是个dom对象
+    var divs=document.getElementsByTagName('div');//div类数组
+    console.log(divs);
+    var div111=document.getElementsByClassName('div111');
+    console.log(div111);
+console.log(document.querySelector('#div1'));
+var div_name=document.getElementsByName('div222');
+console.log(div_name,typeof div_name);
+console.log($('[name=div222]'));
+//添加节点
+//     1.字符串格式操作原生js innerHTML='<p></p>',Jq里面对象.html('<p></p>');
+   document.getElementById('add').innerHTML='<p>hellow,你好啊我是原生js</p>';
+   $('#add').html('<p>我是jq对象添加过了的啊</p>');
+   //2.节点方式的操作.
+    var p=document.createElement('p');//创建一个p标签
+    var text=document.createTextNode('hellow,你好啊我是原生js');//创建一个文本节点
+    p.appendChild(text);//往p标签里面添加节点文本.
+console.log(p);
+    document.getElementById('add').appendChild(p);
+    //jquery方法
+    $('#add').append($('<p>我是jq方式添加的</p>'));//把字符串用$()包裹起来转换为jq对象.利用append添加
+    //到末尾.
+    //修改替换节点
+    //原生js,父元素.replaceChild(子元素,父元素);
+var replace=document.getElementById('replace');
+console.log(replace);
+
+var pp=document.createElement('p');
+var textt=document.createTextNode('我是用来替换的文本');
+pp.appendChild(textt);
+replace.replaceChild(pp,replace.firstElementChild);
+    //jq中,元素.replaceWith(新元素);
+    var first=$('#replace').find(p).eq(0);
+    console.log(first);
+console.log($('#replace p').eq(0));
+console.log($('#replace p:eq(0)'));
+</script>
+</html>
